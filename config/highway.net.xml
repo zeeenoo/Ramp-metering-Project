@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2024-12-08 19:11:31 by Eclipse SUMO netconvert Version 1.21.0
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <node-files value="config/highway.nod.xml"/>
+        <edge-files value="config/highway.edg.xml"/>
+        <connection-files value="config/highway.con.xml"/>
+    </input>
+
+    <output>
+        <output-file value="config/highway.net.xml"/>
+    </output>
+
+    <building_defaults>
+        <default.lanewidth value="3.2"/>
+        <default.junctions.radius value="5"/>
+    </building_defaults>
+
+</netconvertConfiguration>
+-->
+
+<net version="1.20" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="0.00,0.00,1000.00,100.00" origBoundary="0.00,0.00,1000.00,100.00" projParameter="!"/>
+
+    <edge id=":merge_0" function="internal">
+        <lane id=":merge_0_0" index="0" speed="33.33" length="8.67" width="3.20" shape="493.40,-8.00 502.07,-8.00"/>
+        <lane id=":merge_0_1" index="1" speed="33.33" length="8.67" width="3.20" shape="493.40,-4.80 502.07,-4.80"/>
+        <lane id=":merge_0_2" index="2" speed="33.33" length="8.67" width="3.20" shape="493.40,-1.60 502.07,-1.60"/>
+    </edge>
+    <edge id=":merge_3" function="internal">
+        <lane id=":merge_3_0" index="0" speed="12.16" length="13.66" width="3.20" shape="495.14,2.60 496.83,-0.55 497.56,-4.03 498.81,-6.84 502.07,-8.00"/>
+    </edge>
+
+    <edge id="highway_in" from="start" to="merge" priority="1">
+        <lane id="highway_in_0" index="0" speed="33.33" length="493.40" width="3.20" shape="0.00,-8.00 493.40,-8.00"/>
+        <lane id="highway_in_1" index="1" speed="33.33" length="493.40" width="3.20" shape="0.00,-4.80 493.40,-4.80"/>
+        <lane id="highway_in_2" index="2" speed="33.33" length="493.40" width="3.20" shape="0.00,-1.60 493.40,-1.60"/>
+    </edge>
+    <edge id="highway_out" from="merge" to="end" priority="1">
+        <lane id="highway_out_0" index="0" speed="33.33" length="497.93" width="3.20" shape="502.07,-8.00 1000.00,-8.00"/>
+        <lane id="highway_out_1" index="1" speed="33.33" length="497.93" width="3.20" shape="502.07,-4.80 1000.00,-4.80"/>
+        <lane id="highway_out_2" index="2" speed="33.33" length="497.93" width="3.20" shape="502.07,-1.60 1000.00,-1.60"/>
+    </edge>
+    <edge id="ramp" from="ramp_start" to="merge" priority="1">
+        <lane id="ramp_0" index="0" speed="16.67" length="136.15" width="3.20" shape="398.87,98.87 495.14,2.60"/>
+    </edge>
+
+    <tlLogic id="merge" type="static" programID="0" offset="0">
+        <phase duration="38" state="GGGr"/>
+        <phase duration="7"  state="yyyr"/>
+        <phase duration="38" state="rrrG"/>
+        <phase duration="7"  state="rrry"/>
+    </tlLogic>
+
+    <junction id="end" type="dead_end" x="1000.00" y="0.00" incLanes="highway_out_0 highway_out_1 highway_out_2" intLanes="" shape="1000.00,-9.60 1000.00,0.00"/>
+    <junction id="merge" type="traffic_light" x="500.00" y="0.00" incLanes="highway_in_0 highway_in_1 highway_in_2 ramp_0" intLanes=":merge_0_0 :merge_0_1 :merge_0_2 :merge_3_0" shape="502.07,0.00 502.07,-9.60 493.40,-9.60 493.40,0.00 494.39,0.16 494.59,0.37 494.59,0.65 494.40,1.02 494.01,1.46 496.27,3.73 498.57,1.66 499.59,0.93 500.51,0.41 501.33,0.10" radius="2.07">
+        <request index="0" response="0000" foes="1000" cont="0"/>
+        <request index="1" response="0000" foes="1000" cont="0"/>
+        <request index="2" response="0000" foes="1000" cont="0"/>
+        <request index="3" response="0111" foes="0111" cont="0"/>
+        <param key="tl.green.time" value="30"/>
+        <param key="tl.red.time" value="20"/>
+        <param key="tl.yellow.time" value="3"/>
+    </junction>
+    <junction id="ramp_start" type="dead_end" x="400.00" y="100.00" incLanes="" intLanes="" shape="400.00,100.00 397.74,97.74"/>
+    <junction id="start" type="dead_end" x="0.00" y="0.00" incLanes="" intLanes="" shape="0.00,0.00 0.00,-9.60"/>
+
+    <connection from="highway_in" to="highway_out" fromLane="0" toLane="0" via=":merge_0_0" tl="merge" linkIndex="0" dir="s" state="O"/>
+    <connection from="highway_in" to="highway_out" fromLane="1" toLane="1" via=":merge_0_1" tl="merge" linkIndex="1" dir="s" state="O"/>
+    <connection from="highway_in" to="highway_out" fromLane="2" toLane="2" via=":merge_0_2" tl="merge" linkIndex="2" dir="s" state="O"/>
+    <connection from="ramp" to="highway_out" fromLane="0" toLane="0" via=":merge_3_0" tl="merge" linkIndex="3" dir="l" state="o"/>
+
+    <connection from=":merge_0" to="highway_out" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":merge_0" to="highway_out" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":merge_0" to="highway_out" fromLane="2" toLane="2" dir="s" state="M"/>
+    <connection from=":merge_3" to="highway_out" fromLane="0" toLane="0" dir="l" state="M"/>
+
+</net>
